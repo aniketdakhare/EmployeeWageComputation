@@ -3,16 +3,18 @@
 echo Welcome to Employee Wage Computation Program
 wageperHour=20
 dailyHours=8
-present=1
-attendance=$((RANDOM%2))
-if [ $attendance -eq $present ]
+fullTime=1
+partTime=2
+empCheck=$((RANDOM%3))
+if [ $empCheck -eq $fullTime ]
 then
-   echo "Employee Present"
-	dailyhours=8
+	dailyHours=8
+elif [ $empCheck -eq $partTime ]
+then
+	dailyHours=4
 else
-   echo "Emmployee Absent"
-	dailyhours=0
+	dailyHours=0
 fi
-perDayWage=$(($dailyHours*$wageperHour))
+empWage=$(($dailyHours*$wageperHour))
 
-echo "Daily Employee Wage : Rs. $perDayWage "
+echo "Daily Employee Wage : Rs. $empWage "
