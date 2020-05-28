@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo Welcome to Employee Wage Computation Program
 wageperHour=20
@@ -8,7 +8,8 @@ partTime=2
 workDays=20
 maxHours=100
 totalEmpHours=0
-days=1
+days=0
+declare -A dailyWage
 
 function workHours()
 {
@@ -25,14 +26,15 @@ function workHours()
         esac
 }
 
-while [ $totalEmpHours -le $maxHours -a $days -le $workDays ]
+while [ $totalEmpHours -le $maxHours -a $days -lt $workDays ]
 do
-	empCheck=$((RANDOM%3))
-	((days++))
-	workHours $empCheck
-	totalEmpHours=$(($totalEmpHours+$dailyHours))
-	dailyWage[$days]=$(($dailyHours*$wageperHour))
+        empCheck=$((RANDOM%3))
+        ((days++))
+        workHours $empCheck
+        totalEmpHours=$(($totalEmpHours+$dailyHours))
+        dailyWage[Day"$days"]=$(($dailyHours*$wageperHour))
 done
 empWageperMonth=$(($totalEmpHours*$wageperHour))
 echo "Employee Wage for month : Rs. $empWageperMonth "
 echo ${dailyWage[@]}
+echo ${!dailyWage[@]}
