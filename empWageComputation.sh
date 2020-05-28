@@ -9,9 +9,10 @@ workDays=20
 maxHours=100
 totalEmpHours=0
 days=1
-function hours()
+
+function workHours()
 {
-	case $empCheck in
+        case $empCheck in
                 $fullTime)
                         dailyHours=8
                         ;;
@@ -19,16 +20,19 @@ function hours()
                         dailyHours=4
                         ;;
                 *)
-			dailyHours=0
+                        dailyHours=0
                         ;;
         esac
 }
-while [ $totalEmpHours -lt $maxHours -a $days -le $workDays ]
+
+while [ $totalEmpHours -le $maxHours -a $days -le $workDays ]
 do
 	empCheck=$((RANDOM%3))
-	hours $empCheck
+	((days++))
+	workHours $empCheck
 	totalEmpHours=$(($totalEmpHours+$dailyHours))
+	dailyWage[$days]=$(($dailyHours*$wageperHour))
 done
 empWageperMonth=$(($totalEmpHours*$wageperHour))
 echo "Employee Wage for month : Rs. $empWageperMonth "
-
+echo ${dailyWage[@]}
