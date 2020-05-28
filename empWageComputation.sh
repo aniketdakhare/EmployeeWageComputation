@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 echo Welcome to Employee Wage Computation Program
 wageperHour=20
