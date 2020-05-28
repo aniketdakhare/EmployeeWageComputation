@@ -5,6 +5,7 @@ wageperHour=20
 dailyHours=8
 fullTime=1
 partTime=2
+workDays=20
 empCheck=$((RANDOM%3))
 case $empCheck in
 	$fullTime)
@@ -21,5 +22,5 @@ case $empCheck in
 		;;
 esac
 empWage=$(($dailyHours*$wageperHour))
-
-echo "Daily Employee Wage : Rs. $empWage "
+empWageperMonth=$(($empWage*$workDays))
+echo "Employee Wage for month : Rs. $empWageperMonth "
